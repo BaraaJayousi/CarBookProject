@@ -1,0 +1,32 @@
+{% extends 'main_layout.html' %}
+{% load crispy_forms_tags %}
+
+{%block title%}Login {% endblock %}
+
+{% block content %}
+<div class="bg-info bg-gradient overflow-hidden" style="height:100vh ">
+  <div class="container" style="padding: 8%">
+    <div class="row justify-content-center">
+      <div class="col-7">
+        <div class="card shadow">
+          <div class="card-body py-4 px-5">
+            <div class="row">
+              <h3 class="card-title text-center mb-5">Login</h3>
+              <form action="#" method="post">
+                <!-- django form -->
+                {% csrf_token %} 
+                {{LoginForm|crispy}}
+                <input class="btn btn-primary w-100" type="submit" value="Login">
+              </form>
+            </div>
+            <div class="row text-center mt-3">
+              <p>Not registered? <a class="link-underline link-underline-opacity-0" href="{% url 'auth_app:register_form' %}">Create an account</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
