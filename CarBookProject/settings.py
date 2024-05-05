@@ -31,8 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'auth_app',
+    'authentication_app',
     'crispy_forms',
+    "crispy_bootstrap5",
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -53,6 +54,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'CarBookProject.urls'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+CRISPY_FAIL_SILENTLY = not DEBUG
+
+AUTH_USER_MODEL = 'authentication_app.User'
 
 TEMPLATES = [
     {

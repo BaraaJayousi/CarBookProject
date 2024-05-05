@@ -15,7 +15,7 @@
               <form action="#" method="post">
                 <!-- django form -->
                 {% csrf_token %} 
-                
+                {{RegisterForm|crispy}}
                 <input class="btn btn-primary w-100" type="submit" value="Register">
               </form>
             </div>
