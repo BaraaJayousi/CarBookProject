@@ -8,7 +8,7 @@ class ShopAdmin(admin.ModelAdmin):
 
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
-  list_display = ['brand', 'shop']
+  list_display = ['car_model', 'model_year','shop']
 
 @admin.register(Brand)
 class CarBrandAdmin(admin.ModelAdmin):
@@ -25,3 +25,7 @@ class CarModelYearAdmin(admin.ModelAdmin):
 @admin.register(CarFeature)
 class CarFeaturesAdmin(admin.ModelAdmin):
   list_display = ['name']
+
+@admin.register(Reservation)
+class CarReservationAdmin(admin.ModelAdmin):
+  list_display = ['users', 'cars']

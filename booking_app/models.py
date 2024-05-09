@@ -20,24 +20,22 @@ class ModelYear(models.Model):
     def __str__(self):
         return self.year
 
-class CarModel(models.Model):
-    name = models.CharField(max_length=255)
-    model_year = models.ForeignKey(ModelYear, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"{self.name} ({self.model_year})"
 
 class Brand(models.Model):
     name = models.CharField(max_length=255)
-    model = models.ForeignKey(CarModel, related_name="models",on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return f"{self.name}"
+
+class CarModel(models.Model):
+    name = models.CharField(max_length=255)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.name} {self.model}"
-
+        return f"{self.brand} {self.name}"
 
 class CarFeature(models.Model):
     name = models.CharField(max_length=255)
@@ -67,18 +65,22 @@ class Car(models.Model):
     price = models.IntegerField()
     shop = models.ForeignKey(Shop, related_name="cars",on_delete=models.CASCADE)
     fuel = models.CharField(default=FuelTypes.GASOLINE, choices=FuelTypes, max_length=10)
-    brand = models.OneToOneField(Brand, related_name="cars",on_delete=models.CASCADE)
+    model_year = models.ForeignKey(ModelYear, on_delete=models.CASCADE)
+    car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE)
     car_features = models.ManyToManyField(CarFeature, related_name="cars")
+    car_image = models.ImageField()
+    featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    
+    def __str__(self):
+        return f"{self.car_model} ({self.model_year})"
 
-    def add_feature_to_car(request,car_feature_id):
-        if request.POST['car_id']:
-            thisCar_Feature = CarFeature.objects.get(id=car_feature_id)
-            thisCar = Car.objects.get(id=request.POST['car_id'])
-            thisCar_Feature.cars.add(thisCar)
+    # def add_feature_to_car(request,car_feature_id):
+    #     if request.POST['car_id']:
+    #         thisCar_Feature = CarFeature.objects.get(id=car_feature_id)
+    #         thisCar = Car.objects.get(id=request.POST['car_id'])
+    #         thisCar_Feature.cars.add(thisCar)
 
 
 class Reservation(models.Model):
