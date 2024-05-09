@@ -1,5 +1,6 @@
 from django.db import models
 from authentication_app.models import User
+from .manager import CarManager
 
 class Shop(models.Model):
     shop_name = models.CharField(max_length=255)
@@ -73,6 +74,7 @@ class Car(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    objects = CarManager()
     def __str__(self):
         return f"{self.car_model} ({self.model_year})"
 
