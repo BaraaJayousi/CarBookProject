@@ -1,64 +1,85 @@
 from django.db import models
 from authentication_app.models import User
 
-# class User(models.Model):
-#     first_name = models.CharField(max_length=255)
-#     Last_name = models.CharField(max_length=255)
-#     phone_number = models.CharField(max_length=15)
-#     password = models.CharField(max_length=255)
-#     email = models.CharField(max_length=255)
-#     is_supervisor = models.BooleanField(default=False)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-
 class Shop(models.Model):
     shop_name = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     address=models.CharField(max_length=255)
-    users = models.ForeignKey(User, related_name="shops",on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="shops",on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.shop_name
+
+class ModelYear(models.Model):
+    year = models.CharField(max_length=4)
+    created_at = models.DateField( auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.year
+
+class CarModel(models.Model):
+    name = models.CharField(max_length=255)
+    model_year = models.ForeignKey(ModelYear, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.model_year})"
 
 class Brand(models.Model):
     name = models.CharField(max_length=255)
+    model = models.ForeignKey(CarModel, related_name="models",on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class car_model(models.Model):
-    name = models.CharField(max_length=255)
-    brands = models.ForeignKey(Brand, related_name="models",on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return f"{self.name} {self.model}"
 
-class Fuel(models.Model):
+
+class CarFeature(models.Model):
     name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class Car_Feature(models.Model):
-    name = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.name
     
 class Car(models.Model):
-    car_seats = models.IntegerField()
-    transmition = models.CharField(max_length=255)
-    milge = models.IntegerField()
-    status = models.BooleanField(default=True)
+    class TransmissionTypes(models.TextChoices):
+        AUTOMATIC = "Automatic"
+        MANUAL = "Manual"
+    class CarStatus(models.TextChoices):
+        AVAILABLE = "Available"
+        RESERVED = "Reserved"
+    class FuelTypes(models.TextChoices):
+        ELECTRIC = "Electric"
+        GASOLINE = "Gasoline"
+        DIESEL= "Diesel"
+        HYBRID = "Hybrid"
+
+    car_seats = models.IntegerField(default=5)
+    transmission = models.CharField(max_length=10, default=TransmissionTypes.AUTOMATIC, choices=TransmissionTypes)
+    milage = models.IntegerField()
+    status = models.CharField(default=CarStatus.AVAILABLE, choices=CarStatus, max_length=10)
     price = models.IntegerField()
-    Carcol = models.CharField(max_length=255)
-    shops = models.ForeignKey(Shop, related_name="cars",on_delete=models.CASCADE)
-    fuels = models.OneToOneField(Fuel, related_name="cars",on_delete=models.CASCADE)
-    brands = models.OneToOneField(Brand, related_name="cars",on_delete=models.CASCADE)
-    car_features = models.ManyToManyField(Car_Feature, related_name="cars")
+    shop = models.ForeignKey(Shop, related_name="cars",on_delete=models.CASCADE)
+    fuel = models.CharField(default=FuelTypes.GASOLINE, choices=FuelTypes, max_length=10)
+    brand = models.OneToOneField(Brand, related_name="cars",on_delete=models.CASCADE)
+    car_features = models.ManyToManyField(CarFeature, related_name="cars")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-def add_feature_to_car(request,car_feature_id):
-    if request.POST['car_id']:
-        thisCar_Feature = Car_Feature.objects.get(id=car_feature_id)
-        thisCar = Car.objects.get(id=request.POST['car_id'])
-        thisCar_Feature.cars.add(thisCar)
+    
+
+    def add_feature_to_car(request,car_feature_id):
+        if request.POST['car_id']:
+            thisCar_Feature = CarFeature.objects.get(id=car_feature_id)
+            thisCar = Car.objects.get(id=request.POST['car_id'])
+            thisCar_Feature.cars.add(thisCar)
+
 
 class Reservation(models.Model):
     start_date = models.DateTimeField()
