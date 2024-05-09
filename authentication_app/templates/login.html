@@ -12,7 +12,7 @@
           <div class="card-body py-4 px-5">
             <div class="row">
               <h3 class="card-title text-center mb-5">Login</h3>
-              <form action="#" method="post">
+              <form action="{% url 'auth_app:login_form' %}" method="post">
                 <!-- django form -->
                 {% csrf_token %} 
                 {{LoginForm|crispy}}
