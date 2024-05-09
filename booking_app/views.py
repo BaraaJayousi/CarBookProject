@@ -1,4 +1,9 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.views.generic import View
 
-def index(request):
-    return render(request,'index.html')
+class HomePage(View):
+  def get(self, request):
+    return render(request, "index.html")
+
+

@@ -40,9 +40,9 @@ class Car_Feature(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
 class Car(models.Model):
-    car_seats = models.IntegerField(max_length=2)
+    car_seats = models.IntegerField()
     transmition = models.CharField(max_length=255)
-    milge = models.IntegerField(max_length=10)
+    milge = models.IntegerField()
     status = models.BooleanField(default=True)
     price = models.IntegerField()
     Carcol = models.CharField(max_length=255)
