@@ -6,3 +6,9 @@ class CarManager(Manager):
   
   def get_all_cars(self):
     return self.all()
+  
+  def get_car_by_id(self, id):
+    car = self.filter(id=id).first()
+    if car:
+      return car
+    return False

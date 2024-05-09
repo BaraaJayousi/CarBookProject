@@ -20,6 +20,14 @@ class CarsPage(View):
   
 
 class CarDetailsPage(View):
-  view_template = ""
+  view_template = "car-single.html"
+  context = {}
+  def get(self, request, id):
+    car = Car.objects.get_car_by_id(id)
+    if car:
+      print(car)
+      self.context['car'] = car
+      return render(request, self.view_template, self.context)
+    return redirect(reverse("booking_app:cars_page"))
 
 

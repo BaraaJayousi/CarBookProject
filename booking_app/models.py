@@ -70,6 +70,7 @@ class Car(models.Model):
     car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE)
     car_features = models.ManyToManyField(CarFeature, related_name="cars")
     car_image = models.ImageField()
+    description = models.TextField(default="Your Description here")
     featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
