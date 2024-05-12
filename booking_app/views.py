@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import View
 from .models import Car
+from django.contrib import messages
 
 class HomePage(View):
   view_template = "index.html"
@@ -30,4 +31,13 @@ class CarDetailsPage(View):
       return render(request, self.view_template, self.context)
     return redirect(reverse("booking_app:cars_page"))
 
+class CarBookPage(View):
+  view_template = "booking-page.html"
+  context = {}
+
+  def get(self, request):
+    if request.user.is_authenticated:
+      return render(request, self.view_template, self.context)
+    messages.error(request, "You need to be logged in first")
+    return redirect(reverse("booking_app:home_page"))
 
