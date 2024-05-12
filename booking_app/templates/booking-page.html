@@ -51,9 +51,32 @@
       <div class="container">
         <div class="row justify-content-between">
           <div class="col-md-6">
-            <div class="card">
+            <div class="card border-0">
               <div class="card-body">
-                hi
+                <h5 class="card-title">Trip details</h5>
+                <div class="row justify-content-between">
+                  <div class="col-5 d-flex flex-row align-items-start justify-content-between">
+                    <h4 class="text-right"><i class="icon-my_location"></i></h4>
+                    <div class="text d-flex flex-column">
+                      <h5 class="heading mb-0">Tulkarm Shop</h5>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="row justify-content-between">
+                  <div class="col-12 d-flex flex-row align-items-start justify-content-between">
+                    <h4 class="text-right mr-2"><i class="icon-date_range"></i></h4>
+                    <div class="text d-flex flex-column">
+                      <p class="heading mb-0">Fri, May 7 @ 12:00 PM</p>
+                      <p class="heading mb-0">Fri, May 17 @ 12:00 PM</p>
+                    </div>
+                    <div class="btn btn-secondary rounded">Edit</div>
+                  </div>
+                </div>
+                <form action="#" method="post">
+                  {% csrf_token %}
+                  <input type="submit" class="btn btn-primary w-100 mt-5" value="Confirm Booking"/>
+                </form>
               </div>
             </div>
           </div>
@@ -73,7 +96,18 @@
                 <div class="row">
                   <div class="col-6">
                     <div class="text">
-                      
+                      <h5 class="heading">Rent Rate</h5>
+                    </div>
+                    <div class="text">
+                      <h5 class="heading">Total</h5>
+                    </div>
+                  </div>
+                  <div class="col-6 text-right">
+                    <div class="text mb-2">
+                      <span class="subheading">$50.99 x 7 days</span>
+                    </div>
+                    <div class="text">
+                      <span class="subheading">$365.93</span>
                     </div>
                   </div>
                 </div>
