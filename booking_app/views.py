@@ -69,3 +69,14 @@ class CarBookPage(View):
     messages.error(request, "You need to be logged in first")
     return redirect(reverse("booking_app:home_page"))
 
+
+class MyBookings(View):
+  view_template = "my-bookings.html"
+  context = {}
+
+  def get(self, request):
+    if request.user.is_authenticated:
+      self.context['bookings'] = Reservation.objects.get_reservations_by_user_id(request.user)
+      return render(request, self.view_template, self.context)
+    messages.error(request, "You need to logged in first")
+    return redirect(reverse("booking_app:home_page"))

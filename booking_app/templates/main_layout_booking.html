@@ -44,6 +44,7 @@
             <li class="nav-item active"><a href="{% url 'booking_app:home_page' %}" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
             {% if user.is_authenticated%}
+            <li class="nav-item"><a href="{% url 'booking_app:my_bookings' %}" class="nav-link"><i class="icon-calendar mr-2"></i>My Bookings</a></li>
             <li class="nav-item"><a class="nav-link"><i class="icon-account_box mr-2"></i>Hello {{user.first_name}}</a></li>
             <li class="nav-item"><form action="{% url 'auth_app:logout' %}" method="post" class="nav-link">{% csrf_token %}<input type="submit"class="btn btn-danger rounded-3" value="Logout"/></form></li>
             {% else %}

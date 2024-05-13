@@ -29,6 +29,13 @@ class ReservationManager(Manager):
     reservation = self.create(users=user, cars = car, start_date = start_date, end_date = end_date, shop=shop)
     reservation.save()
     return reservation
+  
+  def get_reservations_by_user_id(self,user):
+    reservations = self.filter(users=user)
+    if reservations:
+      return reservations
+    return False
+
 
 class ShopManager(Manager):
   def get_all_shops(self):
