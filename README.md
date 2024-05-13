@@ -1,11 +1,11 @@
-CarBook
+<h1>CarBook</h1>
 
 Introduction
 
 Welcome to CarBook, the ultimate car rental app. Choose the car you dream of renting in the comfort of your house. Check available cars, and their specification, book in advance and check reviews left by other clients. 
 CarBook makes it easy to find a reliable rental car with a suitable price that suits your budget. The app is going to address these challenges and facilitate user experience for both businesses and users.
 
-Requirements
+<h2><b>Requirements</b></h2>
 
 Key features
 
@@ -39,7 +39,7 @@ Conclusion
 
 CarBook aims to revolutionise the car rental process for both clients and business owners. By enhancing user experince and detailed car information CarBook strives to become the go-to app for everyone who needs to rent a car
 
-Team Members
+<h2><b>Team Members</b></h2>
 
 Baraa Jayousi: https://github.com/BaraaJayousi
 
