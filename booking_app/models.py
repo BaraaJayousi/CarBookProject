@@ -1,6 +1,6 @@
 from django.db import models
 from authentication_app.models import User
-from .manager import CarManager, ReservationManager, ShopManager
+from .manager import CarManager, ReservationManager, ShopManager, UserManager
 
 class Shop(models.Model):
     shop_name = models.CharField(max_length=255)
