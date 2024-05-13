@@ -1,0 +1,778 @@
+(envo2024)
+balqi@Balqis MINGW64 ~/Documents/MyAxsos/Python_stack/my_environments/django/django_fundamentals/CarBookProject (Deployment)
+$ chmod 400 "CarBook.pem"
+(envo2024)
+balqi@Balqis MINGW64 ~/Documents/MyAxsos/Python_stack/my_environments/django/django_fundamentals/CarBookProject (Deployment)
+$ ssh -i "CarBook.pem" ubuntu@ec2-13-48-248-88.eu-north-1.compute.amazonaws.com
+The authenticity of host 'ec2-13-48-248-88.eu-north-1.compute.amazonaws.com (13.48.248.88)' can't be established.
+ED25519 key fingerprint is SHA256:QVWqi/vqxZcXPhAHF6amH0rnsRaqW2PROQA6B9CSR74.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? y
+Please type 'yes', 'no' or the fingerprint: yes
+Warning: Permanently added 'ec2-13-48-248-88.eu-north-1.compute.amazonaws.com' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 24.04 LTS (GNU/Linux 6.8.0-1008-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sun May 12 18:02:24 UTC 2024
+
+  System load:  0.0               Temperature:           -273.1 C
+  Usage of /:   23.2% of 6.71GB   Processes:             108
+  Memory usage: 22%               Users logged in:       0
+  Swap usage:   0%                IPv4 address for ens5: 172.31.34.154
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@ip-172-31-34-154:~$ sudo apt-get update
+Get:1 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+Get:2 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble-updates InRelease [89.7 kB]
+Get:3 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble-backports InRelease [89.7 kB]
+Get:4 http://security.ubuntu.com/ubuntu noble-security InRelease [89.7 kB]
+Get:5 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 Packages [1401 kB]
+Get:6 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main Translation-en [513 kB]
+Get:7 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 Packages [15.0 MB]
+Get:8 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/universe Translation-en [5982 kB]
+Get:9 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [26.7 kB]
+Get:10 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 Components [3871 kB]
+Get:11 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 c-n-f Metadata [301 kB]
+Get:12 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [93.9 kB]
+Get:13 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/restricted Translation-en [18.7 kB]
+Get:14 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [269 kB]
+Get:15 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse Translation-en [118 kB]
+Get:16 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse amd64 Components [35.0 kB]
+Get:17 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse amd64 c-n-f Metadata [8328 B]
+Get:18 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [28.4 kB]
+Get:19 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [8996 B]
+Get:20 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [17.6 kB]
+Get:21 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [6096 B]
+Get:22 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 c-n-f Metadata [112 B]
+Get:23 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 c-n-f Metadata [116 B]
+Get:24 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble-backports/main amd64 c-n-f Metadata [112 B]
+Get:25 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [3936 B]
+Get:26 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe Translation-en [1392 B]
+Get:27 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe amd64 c-n-f Metadata [116 B]
+Get:28 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:29 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 c-n-f Metadata [116 B]
+Get:30 http://security.ubuntu.com/ubuntu noble-security/main Translation-en [8124 B]
+Get:31 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [10.6 kB]
+Get:32 http://security.ubuntu.com/ubuntu noble-security/universe Translation-en [4596 B]
+Get:33 http://security.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [112 B]
+Get:34 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 c-n-f Metadata [116 B]
+Fetched 28.3 MB in 5s (5921 kB/s)
+Reading package lists... Done
+ubuntu@ip-172-31-34-154:~$ sudo apt-get install nginx
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  nginx-common
+Suggested packages:
+  fcgiwrap nginx-doc ssl-cert
+The following NEW packages will be installed:
+  nginx nginx-common
+0 upgraded, 2 newly installed, 0 to remove and 21 not upgraded.
+Need to get 552 kB of archives.
+After this operation, 1596 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 nginx-common all 1.24.0-2ubuntu7 [31.2 kB]
+Get:2 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 nginx amd64 1.24.0-2ubuntu7 [521 kB]
+Fetched 552 kB in 0s (21.0 MB/s)
+Preconfiguring packages ...
+Selecting previously unselected package nginx-common.
+(Reading database ... 71839 files and directories currently installed.)
+Preparing to unpack .../nginx-common_1.24.0-2ubuntu7_all.deb ...
+Unpacking nginx-common (1.24.0-2ubuntu7) ...
+Selecting previously unselected package nginx.
+Preparing to unpack .../nginx_1.24.0-2ubuntu7_amd64.deb ...
+Unpacking nginx (1.24.0-2ubuntu7) ...
+Setting up nginx (1.24.0-2ubuntu7) ...
+Setting up nginx-common (1.24.0-2ubuntu7) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/nginx.service → /usr/lib/systemd/system/nginx.service.
+Processing triggers for ufw (0.36.2-6) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@ip-172-31-34-154:~$ git clone https://github.com/BaraaJayousi/CarBookProject.git
+Cloning into 'CarBookProject'...
+remote: Enumerating objects: 322, done.
+remote: Counting objects: 100% (322/322), done.
+remote: Compressing objects: 100% (232/232), done.
+remote: Total 322 (delta 121), reused 268 (delta 84), pack-reused 0
+Receiving objects: 100% (322/322), 5.81 MiB | 18.95 MiB/s, done.
+Resolving deltas: 100% (121/121), done.
+ubuntu@ip-172-31-34-154:~$ sudo apt-get install python3-venv
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  python3-pip-whl python3-setuptools-whl python3.12-venv
+The following NEW packages will be installed:
+  python3-pip-whl python3-setuptools-whl python3-venv python3.12-venv
+0 upgraded, 4 newly installed, 0 to remove and 21 not upgraded.
+Need to get 2424 kB of archives.
+After this operation, 2776 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pip-whl all 24.0+dfsg-1ubuntu1 [1702 kB]
+Get:2 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 python3-setuptools-whl all 68.1.2-2ubuntu1 [715 kB]
+Get:3 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 python3.12-venv amd64 3.12.3-1 [5676 B]
+Get:4 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 python3-venv amd64 3.12.3-0ubuntu1 [1032 B]
+Fetched 2424 kB in 0s (48.8 MB/s)
+Selecting previously unselected package python3-pip-whl.
+(Reading database ... 71887 files and directories currently installed.)
+Preparing to unpack .../python3-pip-whl_24.0+dfsg-1ubuntu1_all.deb ...
+Unpacking python3-pip-whl (24.0+dfsg-1ubuntu1) ...
+Selecting previously unselected package python3-setuptools-whl.
+Preparing to unpack .../python3-setuptools-whl_68.1.2-2ubuntu1_all.deb ...
+Unpacking python3-setuptools-whl (68.1.2-2ubuntu1) ...
+Selecting previously unselected package python3.12-venv.
+Preparing to unpack .../python3.12-venv_3.12.3-1_amd64.deb ...
+Unpacking python3.12-venv (3.12.3-1) ...
+Selecting previously unselected package python3-venv.
+Preparing to unpack .../python3-venv_3.12.3-0ubuntu1_amd64.deb ...
+Unpacking python3-venv (3.12.3-0ubuntu1) ...
+Setting up python3-setuptools-whl (68.1.2-2ubuntu1) ...
+Setting up python3-pip-whl (24.0+dfsg-1ubuntu1) ...
+Setting up python3.12-venv (3.12.3-1) ...
+Setting up python3-venv (3.12.3-0ubuntu1) ...
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@ip-172-31-34-154:~$ cd CarBookProject
+ubuntu@ip-172-31-34-154:~/CarBookProject$ python3 -m venv venv
+ubuntu@ip-172-31-34-154:~/CarBookProject$ source venv/bin/activate
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ pip install Django==5.0.4
+Collecting Django==5.0.4
+  Downloading Django-5.0.4-py3-none-any.whl.metadata (4.1 kB)
+Collecting asgiref<4,>=3.7.0 (from Django==5.0.4)
+  Downloading asgiref-3.8.1-py3-none-any.whl.metadata (9.3 kB)
+Collecting sqlparse>=0.3.1 (from Django==5.0.4)
+  Downloading sqlparse-0.5.0-py3-none-any.whl.metadata (3.9 kB)
+Downloading Django-5.0.4-py3-none-any.whl (8.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.2/8.2 MB 44.4 MB/s eta 0:00:00
+Downloading asgiref-3.8.1-py3-none-any.whl (23 kB)
+Downloading sqlparse-0.5.0-py3-none-any.whl (43 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.0/44.0 kB 6.9 MB/s eta 0:00:00
+Installing collected packages: sqlparse, asgiref, Django
+Successfully installed Django-5.0.4 asgiref-3.8.1 sqlparse-0.5.0
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ pip install bcrypt
+Collecting bcrypt
+  Downloading bcrypt-4.1.3-cp39-abi3-manylinux_2_28_x86_64.whl.metadata (9.5 kB)
+Downloading bcrypt-4.1.3-cp39-abi3-manylinux_2_28_x86_64.whl (283 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 283.7/283.7 kB 11.3 MB/s eta 0:00:00
+Installing collected packages: bcrypt
+Successfully installed bcrypt-4.1.3
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ pip install gunicorn
+Collecting gunicorn
+  Downloading gunicorn-22.0.0-py3-none-any.whl.metadata (4.4 kB)
+Collecting packaging (from gunicorn)
+  Downloading packaging-24.0-py3-none-any.whl.metadata (3.2 kB)
+Downloading gunicorn-22.0.0-py3-none-any.whl (84 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 84.4/84.4 kB 3.9 MB/s eta 0:00:00
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject/CarBookProject$ cd ..
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ python manage.py collectstatic
+Traceback (most recent call last):
+  File "/home/ubuntu/CarBookProject/manage.py", line 22, in <module>
+    main()
+  File "/home/ubuntu/CarBookProject/manage.py", line 18, in main
+    execute_from_command_line(sys.argv)
+  File "/home/ubuntu/CarBookProject/venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/ubuntu/CarBookProject/venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 382, in execute
+    settings.INSTALLED_APPS
+  File "/home/ubuntu/CarBookProject/venv/lib/python3.12/site-packages/django/conf/__init__.py", line 89, in __getattr__
+    self._setup(name)
+  File "/home/ubuntu/CarBookProject/venv/lib/python3.12/site-packages/django/conf/__init__.py", line 76, in _setup
+    self._wrapped = Settings(settings_module)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/CarBookProject/venv/lib/python3.12/site-packages/django/conf/__init__.py", line 190, in __init__
+    mod = importlib.import_module(self.SETTINGS_MODULE)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/ubuntu/CarBookProject/CarBookProject/settings.py", line 142, in <module>
+    STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+                  ^^
+NameError: name 'os' is not defined. Did you forget to import 'os'?
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ cd CarBookProject
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject/CarBookProject$ sudo vim settings.py
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject/CarBookProject$ cd..
+cd..: command not found
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject/CarBookProject$ cd ..
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ cd CarBookProject
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject/CarBookProject$ python manage.py collectstatic
+python: can't open file '/home/ubuntu/CarBookProject/CarBookProject/manage.py': [Errno 2] No such file or directory
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject/CarBookProject$ cd ..
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ python manage.py collectstatic
+Traceback (most recent call last):
+  File "/home/ubuntu/CarBookProject/manage.py", line 22, in <module>
+    main()
+  File "/home/ubuntu/CarBookProject/manage.py", line 18, in main
+    execute_from_command_line(sys.argv)
+  File "/home/ubuntu/CarBookProject/venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 442, in execute_from_command_line
+    utility.execute()
+  File "/home/ubuntu/CarBookProject/venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 416, in execute
+    django.setup()
+  File "/home/ubuntu/CarBookProject/venv/lib/python3.12/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/home/ubuntu/CarBookProject/venv/lib/python3.12/site-packages/django/apps/registry.py", line 91, in populate
+    app_config = AppConfig.create(entry)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/CarBookProject/venv/lib/python3.12/site-packages/django/apps/config.py", line 193, in create
+    import_module(entry)
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'crispy_forms'
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ pip install -r requirments.txt
+ERROR: Could not open requirements file: [Errno 2] No such file or directory: 'requirments.txt'
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ cd CarBookProject
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject/CarBookProject$ pip install -r requirments.txt
+ERROR: Could not open requirements file: [Errno 2] No such file or directory: 'requirments.txt'
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject/CarBookProject$ pip install -r requirements.txt
+ERROR: Could not open requirements file: [Errno 2] No such file or directory: 'requirements.txt'
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject/CarBookProject$ ls
+__init__.py  __pycache__  asgi.py  settings.py  urls.py  wsgi.py
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject/CarBookProject$ cd ..
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ pip install -r requirements.txt
+Requirement already satisfied: asgiref==3.8.1 in ./venv/lib/python3.12/site-packages (from -r requirements.txt (line 1)) (3.8.1)
+Collecting crispy-bootstrap5==2024.2 (from -r requirements.txt (line 2))
+  Downloading crispy_bootstrap5-2024.2-py3-none-any.whl.metadata (3.9 kB)
+Requirement already satisfied: Django==5.0.4 in ./venv/lib/python3.12/site-packages (from -r requirements.txt (line 3)) (5.0.4)
+Collecting django-crispy-forms==2.1 (from -r requirements.txt (line 4))
+  Downloading django_crispy_forms-2.1-py3-none-any.whl.metadata (5.0 kB)
+Collecting pillow==10.3.0 (from -r requirements.txt (line 5))
+  Downloading pillow-10.3.0-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (9.2 kB)
+Requirement already satisfied: sqlparse==0.5.0 in ./venv/lib/python3.12/site-packages (from -r requirements.txt (line 6)) (0.5.0)
+Collecting tzdata==2024.1 (from -r requirements.txt (line 7))
+  Downloading tzdata-2024.1-py2.py3-none-any.whl.metadata (1.4 kB)
+Downloading crispy_bootstrap5-2024.2-py3-none-any.whl (24 kB)
+Downloading django_crispy_forms-2.1-py3-none-any.whl (31 kB)
+Downloading pillow-10.3.0-cp312-cp312-manylinux_2_28_x86_64.whl (4.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 89.8 MB/s eta 0:00:00
+Downloading tzdata-2024.1-py2.py3-none-any.whl (345 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 345.4/345.4 kB 28.2 MB/s eta 0:00:00
+Installing collected packages: tzdata, pillow, django-crispy-forms, crispy-bootstrap5
+Successfully installed crispy-bootstrap5-2024.2 django-crispy-forms-2.1 pillow-10.3.0 tzdata-2024.1
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ python manage.py collectstatic
+
+215 static files copied to '/home/ubuntu/CarBookProject/static'.
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ cd CarBookProject/
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject/CarBookProject$ sudo vim settings.py
+
+[No write since last change]
+/bin/bash: line 1: q: command not found
+
+shell returned 127
+
+Press ENTER or type command to continue
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject/CarBookProject$ sudo vim settings.py
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject/CarBookProject$ cd ..
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ python manage.py collectstatic
+
+You have requested to collect static files at the destination
+location as specified in your settings:
+
+    /home/ubuntu/CarBookProject/static
+
+This will overwrite existing files!
+Are you sure you want to do this?
+
+Type 'yes' to continue, or 'no' to cancel: y
+CommandError: Collecting static files cancelled.
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ python manage.py collectstatic
+
+You have requested to collect static files at the destination
+location as specified in your settings:
+
+    /home/ubuntu/CarBookProject/static
+
+This will overwrite existing files!
+Are you sure you want to do this?
+
+Type 'yes' to continue, or 'no' to cancel: yes
+
+0 static files copied to '/home/ubuntu/CarBookProject/static', 215 unmodified.
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ python manage.py makemigrations
+No changes detected
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, authentication_app, booking_app, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying authentication_app.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying authentication_app.0002_user_phone_number... OK
+  Applying booking_app.0001_initial... OK
+  Applying booking_app.0002_alter_car_car_seats_alter_car_milge... OK
+  Applying booking_app.0003_alter_reservation_users_alter_shop_users_delete_user... OK
+  Applying booking_app.0004_rename_users_shop_user... OK
+  Applying booking_app.0005_rename_brands_car_brand_rename_fuels_car_fuel_and_more... OK
+  Applying booking_app.0006_remove_car_carcol... OK
+  Applying booking_app.0007_rename_milge_car_milage_remove_car_transmition... OK
+  Applying booking_app.0008_car_transmission... OK
+  Applying booking_app.0009_rename_fuel_carmodel_brand_model_alter_car_car_seats_and_more... OK
+  Applying booking_app.0010_rename_car_feature_carfeature... OK
+  Applying booking_app.0011_modelyear_carmodel_model_year... OK
+  Applying booking_app.0012_car_car_image... OK
+  Applying booking_app.0013_remove_carmodel_model_year_car_model_year... OK
+  Applying booking_app.0014_remove_brand_model_carmodel_brand... OK
+  Applying booking_app.0015_remove_car_brand_car_car_model... OK
+  Applying booking_app.0016_alter_car_car_model... OK
+  Applying booking_app.0017_alter_car_car_model... OK
+  Applying booking_app.0018_car_featured... OK
+  Applying booking_app.0019_car_description... OK
+  Applying sessions.0001_initial... OK
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ gunicorn CarBookProject.wsgi
+[2024-05-12 19:25:37 +0000] [2295] [INFO] Starting gunicorn 22.0.0
+[2024-05-12 19:25:37 +0000] [2295] [INFO] Listening at: http://127.0.0.1:8000 (2295)
+[2024-05-12 19:25:37 +0000] [2295] [INFO] Using worker: sync
+[2024-05-12 19:25:37 +0000] [2296] [INFO] Booting worker with pid: 2296
+^C[2024-05-12 19:26:05 +0000] [2295] [INFO] Handling signal: int
+[2024-05-12 19:26:05 +0000] [2296] [INFO] Worker exiting (pid: 2296)
+[2024-05-12 19:26:05 +0000] [2295] [INFO] Shutting down: Master
+(venv) ubuntu@ip-172-31-34-154:~/CarBookProject$ deactivate
+ubuntu@ip-172-31-34-154:~/CarBookProject$ sudo vim /etc/systemd/system/gunicorn.service
+ubuntu@ip-172-31-34-154:~/CarBookProject$ sudo systemctl daemon-reload
+ubuntu@ip-172-31-34-154:~/CarBookProject$ sudo systemctl restart gunicorn
+ubuntu@ip-172-31-34-154:~/CarBookProject$ sudo systemctl status gunicorn
+● gunicorn.service - gunicorn daemon
+     Loaded: loaded (/etc/systemd/system/gunicorn.service; disabled; preset: enabled)
+     Active: active (running) since Sun 2024-05-12 19:32:43 UTC; 13s ago
+   Main PID: 2359 (gunicorn)
+      Tasks: 4 (limit: 1078)
+     Memory: 89.9M (peak: 90.0M)
+        CPU: 953ms
+     CGroup: /system.slice/gunicorn.service
+             ├─2359 /home/ubuntu/CarBookProject/venv/bin/python3 /home/ubuntu/CarBookProject/venv/bin/g>
+             ├─2360 /home/ubuntu/CarBookProject/venv/bin/python3 /home/ubuntu/CarBookProject/venv/bin/g>
+             ├─2361 /home/ubuntu/CarBookProject/venv/bin/python3 /home/ubuntu/CarBookProject/venv/bin/g>
+             └─2362 /home/ubuntu/CarBookProject/venv/bin/python3 /home/ubuntu/CarBookProject/venv/bin/g>
+
+May 12 19:32:43 ip-172-31-34-154 systemd[1]: Started gunicorn.service - gunicorn daemon.
+May 12 19:32:43 ip-172-31-34-154 gunicorn[2359]: [2024-05-12 19:32:43 +0000] [2359] [INFO] Starting gun>
+May 12 19:32:43 ip-172-31-34-154 gunicorn[2359]: [2024-05-12 19:32:43 +0000] [2359] [INFO] Listening at>
+May 12 19:32:43 ip-172-31-34-154 gunicorn[2359]: [2024-05-12 19:32:43 +0000] [2359] [INFO] Using worker>
+May 12 19:32:43 ip-172-31-34-154 gunicorn[2360]: [2024-05-12 19:32:43 +0000] [2360] [INFO] Booting work>
+May 12 19:32:43 ip-172-31-34-154 gunicorn[2361]: [2024-05-12 19:32:43 +0000] [2361] [INFO] Booting work>
+May 12 19:32:43 ip-172-31-34-154 gunicorn[2362]: [2024-05-12 19:32:43 +0000] [2362] [INFO] Booting work>
+
+ubuntu@ip-172-31-34-154:~/CarBookProject$ sudo vim /etc/nginx/sites-available/CarBookProject
+ubuntu@ip-172-31-34-154:~/CarBookProject$ sudo vim /etc/nginx/sites-available/CarBookProject
+ubuntu@ip-172-31-34-154:~/CarBookProject$ sudo ln -s /etc/nginx/sites-available/CarBookProject/etc/nginx/sites-enabled
+ubuntu@ip-172-31-34-154:~/CarBookProject$ sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+ubuntu@ip-172-31-34-154:~/CarBookProject$ cd ..
+ubuntu@ip-172-31-34-154:~$ sudo systemctl daemon-reload
+ubuntu@ip-172-31-34-154:~$ sudo systemctl restart gunicorn
+ubuntu@ip-172-31-34-154:~$ sudo systemctl status gunicorn
+● gunicorn.service - gunicorn daemon
+     Loaded: loaded (/etc/systemd/system/gunicorn.service; disabled; preset: enabled)
+     Active: active (running) since Sun 2024-05-12 19:41:40 UTC; 12s ago
+   Main PID: 2446 (gunicorn)
+      Tasks: 4 (limit: 1078)
+     Memory: 89.9M (peak: 90.3M)
+        CPU: 895ms
+     CGroup: /system.slice/gunicorn.service
+             ├─2446 /home/ubuntu/CarBookProject/venv/bin/python3 /home/ubuntu/CarBookProject/venv/bin/g>
+             ├─2449 /home/ubuntu/CarBookProject/venv/bin/python3 /home/ubuntu/CarBookProject/venv/bin/g>
+             ├─2450 /home/ubuntu/CarBookProject/venv/bin/python3 /home/ubuntu/CarBookProject/venv/bin/g>
+             └─2451 /home/ubuntu/CarBookProject/venv/bin/python3 /home/ubuntu/CarBookProject/venv/bin/g>
+
+May 12 19:41:40 ip-172-31-34-154 systemd[1]: Started gunicorn.service - gunicorn daemon.
+May 12 19:41:40 ip-172-31-34-154 gunicorn[2446]: [2024-05-12 19:41:40 +0000] [2446] [INFO] Starting gun>
+May 12 19:41:40 ip-172-31-34-154 gunicorn[2446]: [2024-05-12 19:41:40 +0000] [2446] [INFO] Listening at>
+May 12 19:41:40 ip-172-31-34-154 gunicorn[2446]: [2024-05-12 19:41:40 +0000] [2446] [INFO] Using worker>
+May 12 19:41:40 ip-172-31-34-154 gunicorn[2449]: [2024-05-12 19:41:40 +0000] [2449] [INFO] Booting work>
+May 12 19:41:40 ip-172-31-34-154 gunicorn[2450]: [2024-05-12 19:41:40 +0000] [2450] [INFO] Booting work>
+May 12 19:41:40 ip-172-31-34-154 gunicorn[2451]: [2024-05-12 19:41:40 +0000] [2451] [INFO] Booting work>
+
+ubuntu@ip-172-31-34-154:~$ sudo vim /etc/nginx/sites-available/CarBookProject
+ubuntu@ip-172-31-34-154:~$ sudo ln -s /etc/nginx/sites-available/CarBookProject/etc/nginx/sites-enabled
+ubuntu@ip-172-31-34-154:~$ sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+ubuntu@ip-172-31-34-154:~$ sudo rm /etc/nginx/sites-enabled/default
+ubuntu@ip-172-31-34-154:~$ sudo service nginx restart
+ubuntu@ip-172-31-34-154:~$ sudo apt-get install libmysqlclient-dev -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libmysqlclient21 libssl-dev libzstd-dev mysql-common zlib1g-dev
+Suggested packages:
+  libssl-doc
+The following NEW packages will be installed:
+  libmysqlclient-dev libmysqlclient21 libssl-dev libzstd-dev mysql-common zlib1g-dev
+0 upgraded, 6 newly installed, 0 to remove and 21 not upgraded.
+Need to get 6468 kB of archives.
+After this operation, 31.8 MB of additional disk space will be used.
+Get:1 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 mysql-common all 5.8+1.1.0build1 [6746 B]
+Get:2 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libmysqlclient21 amd64 8.0.36-2ubuntu3 [1253 kB]
+Get:3 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libssl-dev amd64 3.0.13-0ubuntu3 [2406 kB]
+Get:4 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libzstd-dev amd64 1.5.5+dfsg2-2build1 [364 kB]
+Get:5 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 zlib1g-dev amd64 1:1.3.dfsg-3.1ubuntu2 [894 kB]
+Get:6 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libmysqlclient-dev amd64 8.0.36-2ubuntu3 [1544 kB]
+Fetched 6468 kB in 0s (78.1 MB/s)
+Selecting previously unselected package mysql-common.
+(Reading database ... 71904 files and directories currently installed.)
+Preparing to unpack .../0-mysql-common_5.8+1.1.0build1_all.deb ...
+Unpacking mysql-common (5.8+1.1.0build1) ...
+Selecting previously unselected package libmysqlclient21:amd64.
+Preparing to unpack .../1-libmysqlclient21_8.0.36-2ubuntu3_amd64.deb ...
+Unpacking libmysqlclient21:amd64 (8.0.36-2ubuntu3) ...
+Selecting previously unselected package libssl-dev:amd64.
+Preparing to unpack .../2-libssl-dev_3.0.13-0ubuntu3_amd64.deb ...
+Unpacking libssl-dev:amd64 (3.0.13-0ubuntu3) ...
+Selecting previously unselected package libzstd-dev:amd64.
+Preparing to unpack .../3-libzstd-dev_1.5.5+dfsg2-2build1_amd64.deb ...
+Unpacking libzstd-dev:amd64 (1.5.5+dfsg2-2build1) ...
+Selecting previously unselected package zlib1g-dev:amd64.
+Preparing to unpack .../4-zlib1g-dev_1%3a1.3.dfsg-3.1ubuntu2_amd64.deb ...
+Unpacking zlib1g-dev:amd64 (1:1.3.dfsg-3.1ubuntu2) ...
+Selecting previously unselected package libmysqlclient-dev.
+Preparing to unpack .../5-libmysqlclient-dev_8.0.36-2ubuntu3_amd64.deb ...
+Unpacking libmysqlclient-dev (8.0.36-2ubuntu3) ...
+Setting up mysql-common (5.8+1.1.0build1) ...
+update-alternatives: using /etc/mysql/my.cnf.fallback to provide /etc/mysql/my.cnf (my.cnf) in auto mode
+Setting up libmysqlclient21:amd64 (8.0.36-2ubuntu3) ...
+Setting up libzstd-dev:amd64 (1.5.5+dfsg2-2build1) ...
+Setting up libssl-dev:amd64 (3.0.13-0ubuntu3) ...
+Setting up zlib1g-dev:amd64 (1:1.3.dfsg-3.1ubuntu2) ...
+Setting up libmysqlclient-dev (8.0.36-2ubuntu3) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8) ...
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@ip-172-31-34-154:~$ sudo apt-get install mysql-server -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libcgi-fast-perl libcgi-pm-perl libclone-perl libencode-locale-perl libevent-pthreads-2.1-7t64
+  libfcgi-bin libfcgi-perl libfcgi0t64 libhtml-parser-perl libhtml-tagset-perl libhtml-template-perl
+  libhttp-date-perl libhttp-message-perl libio-html-perl liblwp-mediatypes-perl libmecab2
+  libprotobuf-lite32t64 libtimedate-perl liburi-perl mecab-ipadic mecab-ipadic-utf8 mecab-utils
+  mysql-client-8.0 mysql-client-core-8.0 mysql-server-8.0 mysql-server-core-8.0
+Suggested packages:
+  libdata-dump-perl libipc-sharedcache-perl libio-compress-brotli-perl libbusiness-isbn-perl
+  libregexp-ipv6-perl libwww-perl mailx tinyca
+The following NEW packages will be installed:
+  libcgi-fast-perl libcgi-pm-perl libclone-perl libencode-locale-perl libevent-pthreads-2.1-7t64
+  libfcgi-bin libfcgi-perl libfcgi0t64 libhtml-parser-perl libhtml-tagset-perl libhtml-template-perl
+  libhttp-date-perl libhttp-message-perl libio-html-perl liblwp-mediatypes-perl libmecab2
+  libprotobuf-lite32t64 libtimedate-perl liburi-perl mecab-ipadic mecab-ipadic-utf8 mecab-utils
+  mysql-client-8.0 mysql-client-core-8.0 mysql-server mysql-server-8.0 mysql-server-core-8.0
+0 upgraded, 27 newly installed, 0 to remove and 21 not upgraded.
+Need to get 29.5 MB of archives.
+After this operation, 242 MB of additional disk space will be used.
+Get:1 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 mysql-client-core-8.0 amd64 8.0.36-2ubuntu3 [2775 kB]
+Get:2 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 mysql-client-8.0 amd64 8.0.36-2ubuntu3 [22.4 kB]
+Get:3 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libevent-pthreads-2.1-7t64 amd64 2.1.12-stable-9ubuntu2 [7982 B]
+Get:4 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libmecab2 amd64 0.996-14ubuntu4 [201 kB]
+Get:5 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libprotobuf-lite32t64 amd64 3.21.12-8.2build1 [238 kB]
+Get:6 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 mysql-server-core-8.0 amd64 8.0.36-2ubuntu3 [17.4 MB]
+Get:7 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 mysql-server-8.0 amd64 8.0.36-2ubuntu3 [1427 kB]
+Get:8 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libhtml-tagset-perl all 3.20-6 [11.3 kB]
+Get:9 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 liburi-perl all 5.27-1 [88.0 kB]
+Get:10 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libhtml-parser-perl amd64 3.81-1build3 [85.8 kB]
+Get:11 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libcgi-pm-perl all 4.63-1 [185 kB]
+Get:12 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libfcgi0t64 amd64 2.4.2-2.1build1 [26.8 kB]
+Get:13 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libfcgi-perl amd64 0.82+ds-3build2 [21.7 kB]
+Get:14 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libcgi-fast-perl all 1:2.17-1 [10.3 kB]
+Get:15 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libclone-perl amd64 0.46-1build3 [10.7 kB]
+Get:16 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libencode-locale-perl all 1.05-3 [11.6 kB]
+Get:17 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libfcgi-bin amd64 2.4.2-2.1build1 [11.2 kB]
+Get:18 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libhtml-template-perl all 2.97-2 [60.2 kB]
+Get:19 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libtimedate-perl all 2.3300-2 [34.0 kB]
+Get:20 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libhttp-date-perl all 6.06-1 [10.2 kB]
+Get:21 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libio-html-perl all 1.004-3 [15.9 kB]
+Get:22 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 liblwp-mediatypes-perl all 6.04-2 [20.1 kB]
+Get:23 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libhttp-message-perl all 6.45-1ubuntu1 [78.2 kB]
+Get:24 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 mecab-utils amd64 0.996-14ubuntu4 [4804 B]
+Get:25 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 mecab-ipadic all 2.7.0-20070801+main-3 [6718 kB]
+Get:26 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 mecab-ipadic-utf8 all 2.7.0-20070801+main-3 [4384 B]
+Get:27 http://eu-north-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 mysql-server all 8.0.36-2ubuntu3 [9516 B]
+Fetched 29.5 MB in 0s (67.3 MB/s)
+Preconfiguring packages ...
+Selecting previously unselected package mysql-client-core-8.0.
+(Reading database ... 72163 files and directories currently installed.)
+Preparing to unpack .../00-mysql-client-core-8.0_8.0.36-2ubuntu3_amd64.deb ...
+Unpacking mysql-client-core-8.0 (8.0.36-2ubuntu3) ...
+Selecting previously unselected package mysql-client-8.0.
+Preparing to unpack .../01-mysql-client-8.0_8.0.36-2ubuntu3_amd64.deb ...
+Unpacking mysql-client-8.0 (8.0.36-2ubuntu3) ...
+Selecting previously unselected package libevent-pthreads-2.1-7t64:amd64.
+Preparing to unpack .../02-libevent-pthreads-2.1-7t64_2.1.12-stable-9ubuntu2_amd64.deb ...
+Unpacking libevent-pthreads-2.1-7t64:amd64 (2.1.12-stable-9ubuntu2) ...
+Selecting previously unselected package libmecab2:amd64.
+Preparing to unpack .../03-libmecab2_0.996-14ubuntu4_amd64.deb ...
+Unpacking libmecab2:amd64 (0.996-14ubuntu4) ...
+Selecting previously unselected package libprotobuf-lite32t64:amd64.
+Preparing to unpack .../04-libprotobuf-lite32t64_3.21.12-8.2build1_amd64.deb ...
+Unpacking libprotobuf-lite32t64:amd64 (3.21.12-8.2build1) ...
+Selecting previously unselected package mysql-server-core-8.0.
+Preparing to unpack .../05-mysql-server-core-8.0_8.0.36-2ubuntu3_amd64.deb ...
+Unpacking mysql-server-core-8.0 (8.0.36-2ubuntu3) ...
+Selecting previously unselected package mysql-server-8.0.
+Preparing to unpack .../06-mysql-server-8.0_8.0.36-2ubuntu3_amd64.deb ...
+Unpacking mysql-server-8.0 (8.0.36-2ubuntu3) ...
+Selecting previously unselected package libhtml-tagset-perl.
+Preparing to unpack .../07-libhtml-tagset-perl_3.20-6_all.deb ...
+Unpacking libhtml-tagset-perl (3.20-6) ...
+Selecting previously unselected package liburi-perl.
+Preparing to unpack .../08-liburi-perl_5.27-1_all.deb ...
+Unpacking liburi-perl (5.27-1) ...
+Selecting previously unselected package libhtml-parser-perl:amd64.
+Preparing to unpack .../09-libhtml-parser-perl_3.81-1build3_amd64.deb ...
+Unpacking libhtml-parser-perl:amd64 (3.81-1build3) ...
+Selecting previously unselected package libcgi-pm-perl.
+Preparing to unpack .../10-libcgi-pm-perl_4.63-1_all.deb ...
+Unpacking libcgi-pm-perl (4.63-1) ...
+Selecting previously unselected package libfcgi0t64:amd64.
+Preparing to unpack .../11-libfcgi0t64_2.4.2-2.1build1_amd64.deb ...
+Unpacking libfcgi0t64:amd64 (2.4.2-2.1build1) ...
+Selecting previously unselected package libfcgi-perl.
+Preparing to unpack .../12-libfcgi-perl_0.82+ds-3build2_amd64.deb ...
+Unpacking libfcgi-perl (0.82+ds-3build2) ...
+Selecting previously unselected package libcgi-fast-perl.
+Preparing to unpack .../13-libcgi-fast-perl_1%3a2.17-1_all.deb ...
+Unpacking libcgi-fast-perl (1:2.17-1) ...
+Selecting previously unselected package libclone-perl:amd64.
+Preparing to unpack .../14-libclone-perl_0.46-1build3_amd64.deb ...
+Unpacking libclone-perl:amd64 (0.46-1build3) ...
+Selecting previously unselected package libencode-locale-perl.
+Preparing to unpack .../15-libencode-locale-perl_1.05-3_all.deb ...
+Unpacking libencode-locale-perl (1.05-3) ...
+Selecting previously unselected package libfcgi-bin.
+Preparing to unpack .../16-libfcgi-bin_2.4.2-2.1build1_amd64.deb ...
+Unpacking libfcgi-bin (2.4.2-2.1build1) ...
+Selecting previously unselected package libhtml-template-perl.
+Preparing to unpack .../17-libhtml-template-perl_2.97-2_all.deb ...
+Unpacking libhtml-template-perl (2.97-2) ...
+Selecting previously unselected package libtimedate-perl.
+Preparing to unpack .../18-libtimedate-perl_2.3300-2_all.deb ...
+Unpacking libtimedate-perl (2.3300-2) ...
+Selecting previously unselected package libhttp-date-perl.
+Preparing to unpack .../19-libhttp-date-perl_6.06-1_all.deb ...
+Unpacking libhttp-date-perl (6.06-1) ...
+Selecting previously unselected package libio-html-perl.
+Preparing to unpack .../20-libio-html-perl_1.004-3_all.deb ...
+Unpacking libio-html-perl (1.004-3) ...
+Selecting previously unselected package liblwp-mediatypes-perl.
+Preparing to unpack .../21-liblwp-mediatypes-perl_6.04-2_all.deb ...
+Unpacking liblwp-mediatypes-perl (6.04-2) ...
+Selecting previously unselected package libhttp-message-perl.
+Preparing to unpack .../22-libhttp-message-perl_6.45-1ubuntu1_all.deb ...
+Unpacking libhttp-message-perl (6.45-1ubuntu1) ...
+Selecting previously unselected package mecab-utils.
+Preparing to unpack .../23-mecab-utils_0.996-14ubuntu4_amd64.deb ...
+Unpacking mecab-utils (0.996-14ubuntu4) ...
+Selecting previously unselected package mecab-ipadic.
+Preparing to unpack .../24-mecab-ipadic_2.7.0-20070801+main-3_all.deb ...
+Unpacking mecab-ipadic (2.7.0-20070801+main-3) ...
+Selecting previously unselected package mecab-ipadic-utf8.
+Preparing to unpack .../25-mecab-ipadic-utf8_2.7.0-20070801+main-3_all.deb ...
+Unpacking mecab-ipadic-utf8 (2.7.0-20070801+main-3) ...
+Selecting previously unselected package mysql-server.
+Preparing to unpack .../26-mysql-server_8.0.36-2ubuntu3_all.deb ...
+Unpacking mysql-server (8.0.36-2ubuntu3) ...
+Setting up libprotobuf-lite32t64:amd64 (3.21.12-8.2build1) ...
+Setting up libmecab2:amd64 (0.996-14ubuntu4) ...
+Setting up mysql-client-core-8.0 (8.0.36-2ubuntu3) ...
+Setting up libclone-perl:amd64 (0.46-1build3) ...
+Setting up libevent-pthreads-2.1-7t64:amd64 (2.1.12-stable-9ubuntu2) ...
+Setting up libfcgi0t64:amd64 (2.4.2-2.1build1) ...
+Setting up libhtml-tagset-perl (3.20-6) ...
+Setting up liblwp-mediatypes-perl (6.04-2) ...
+Setting up libfcgi-bin (2.4.2-2.1build1) ...
+Setting up libencode-locale-perl (1.05-3) ...
+Setting up mecab-utils (0.996-14ubuntu4) ...
+Setting up libio-html-perl (1.004-3) ...
+Setting up mysql-server-core-8.0 (8.0.36-2ubuntu3) ...
+Setting up libtimedate-perl (2.3300-2) ...
+Setting up mysql-client-8.0 (8.0.36-2ubuntu3) ...
+Setting up libfcgi-perl (0.82+ds-3build2) ...
+Setting up liburi-perl (5.27-1) ...
+Setting up mysql-server-8.0 (8.0.36-2ubuntu3) ...
+update-alternatives: using /etc/mysql/mysql.cnf to provide /etc/mysql/my.cnf (my.cnf) in auto mode
+Renaming removed key_buffer and myisam-recover options (if present)
+mysqld will log errors to /var/log/mysql/error.log
+mysqld is running as pid 3113
+Created symlink /etc/systemd/system/multi-user.target.wants/mysql.service → /usr/lib/systemd/system/mysql.service.
+Setting up libhttp-date-perl (6.06-1) ...
+Setting up mecab-ipadic (2.7.0-20070801+main-3) ...
+Compiling IPA dictionary for Mecab.  This takes long time...
+reading /usr/share/mecab/dic/ipadic/unk.def ... 40
+emitting double-array: 100% |###########################################|
+/usr/share/mecab/dic/ipadic/model.def is not found. skipped.
+reading /usr/share/mecab/dic/ipadic/Prefix.csv ... 221
+reading /usr/share/mecab/dic/ipadic/Noun.number.csv ... 42
+reading /usr/share/mecab/dic/ipadic/Postp.csv ... 146
+reading /usr/share/mecab/dic/ipadic/Verb.csv ... 130750
+reading /usr/share/mecab/dic/ipadic/Noun.verbal.csv ... 12146
+reading /usr/share/mecab/dic/ipadic/Noun.org.csv ... 16668
+reading /usr/share/mecab/dic/ipadic/Others.csv ... 2
+reading /usr/share/mecab/dic/ipadic/Noun.nai.csv ... 42
+reading /usr/share/mecab/dic/ipadic/Adnominal.csv ... 135
+reading /usr/share/mecab/dic/ipadic/Noun.adjv.csv ... 3328
+reading /usr/share/mecab/dic/ipadic/Auxil.csv ... 199
+reading /usr/share/mecab/dic/ipadic/Noun.proper.csv ... 27328
+reading /usr/share/mecab/dic/ipadic/Suffix.csv ... 1393
+reading /usr/share/mecab/dic/ipadic/Postp-col.csv ... 91
+reading /usr/share/mecab/dic/ipadic/Interjection.csv ... 252
+reading /usr/share/mecab/dic/ipadic/Noun.adverbal.csv ... 795
+reading /usr/share/mecab/dic/ipadic/Adverb.csv ... 3032
+reading /usr/share/mecab/dic/ipadic/Noun.name.csv ... 34202
+reading /usr/share/mecab/dic/ipadic/Noun.others.csv ... 151
+reading /usr/share/mecab/dic/ipadic/Filler.csv ... 19
+reading /usr/share/mecab/dic/ipadic/Noun.place.csv ... 72999
+reading /usr/share/mecab/dic/ipadic/Conjunction.csv ... 171
+reading /usr/share/mecab/dic/ipadic/Symbol.csv ... 208
+reading /usr/share/mecab/dic/ipadic/Noun.csv ... 60477
+reading /usr/share/mecab/dic/ipadic/Noun.demonst.csv ... 120
+reading /usr/share/mecab/dic/ipadic/Adj.csv ... 27210
+emitting double-array: 100% |###########################################|
+reading /usr/share/mecab/dic/ipadic/matrix.def ... 1316x1316
+emitting matrix      : 100% |###########################################|
+
+done!
+update-alternatives: using /var/lib/mecab/dic/ipadic to provide /var/lib/mecab/dic/debian (mecab-dictionary) in auto mode
+Setting up mecab-ipadic-utf8 (2.7.0-20070801+main-3) ...
+Compiling IPA dictionary for Mecab.  This takes long time...
+reading /usr/share/mecab/dic/ipadic/unk.def ... 40
+emitting double-array: 100% |###########################################|
+/usr/share/mecab/dic/ipadic/model.def is not found. skipped.
+reading /usr/share/mecab/dic/ipadic/Prefix.csv ... 221
+reading /usr/share/mecab/dic/ipadic/Noun.number.csv ... 42
+reading /usr/share/mecab/dic/ipadic/Postp.csv ... 146
+reading /usr/share/mecab/dic/ipadic/Verb.csv ... 130750
+reading /usr/share/mecab/dic/ipadic/Noun.verbal.csv ... 12146
+reading /usr/share/mecab/dic/ipadic/Noun.org.csv ... 16668
+reading /usr/share/mecab/dic/ipadic/Others.csv ... 2
+reading /usr/share/mecab/dic/ipadic/Noun.nai.csv ... 42
+reading /usr/share/mecab/dic/ipadic/Adnominal.csv ... 135
+reading /usr/share/mecab/dic/ipadic/Noun.adjv.csv ... 3328
+reading /usr/share/mecab/dic/ipadic/Auxil.csv ... 199
+reading /usr/share/mecab/dic/ipadic/Noun.proper.csv ... 27328
+reading /usr/share/mecab/dic/ipadic/Suffix.csv ... 1393
+reading /usr/share/mecab/dic/ipadic/Postp-col.csv ... 91
+reading /usr/share/mecab/dic/ipadic/Interjection.csv ... 252
+reading /usr/share/mecab/dic/ipadic/Noun.adverbal.csv ... 795
+reading /usr/share/mecab/dic/ipadic/Adverb.csv ... 3032
+reading /usr/share/mecab/dic/ipadic/Noun.name.csv ... 34202
+reading /usr/share/mecab/dic/ipadic/Noun.others.csv ... 151
+reading /usr/share/mecab/dic/ipadic/Filler.csv ... 19
+reading /usr/share/mecab/dic/ipadic/Noun.place.csv ... 72999
+reading /usr/share/mecab/dic/ipadic/Conjunction.csv ... 171
+reading /usr/share/mecab/dic/ipadic/Symbol.csv ... 208
+reading /usr/share/mecab/dic/ipadic/Noun.csv ... 60477
+reading /usr/share/mecab/dic/ipadic/Noun.demonst.csv ... 120
+reading /usr/share/mecab/dic/ipadic/Adj.csv ... 27210
+emitting double-array: 100% |###########################################|
+reading /usr/share/mecab/dic/ipadic/matrix.def ... 1316x1316
+emitting matrix      : 100% |###########################################|
+
+done!
+update-alternatives: using /var/lib/mecab/dic/ipadic-utf8 to provide /var/lib/mecab/dic/debian (mecab-dictionary) in auto mode
+Setting up libhtml-parser-perl:amd64 (3.81-1build3) ...
+Setting up libhttp-message-perl (6.45-1ubuntu1) ...
+Setting up mysql-server (8.0.36-2ubuntu3) ...
+Setting up libcgi-pm-perl (4.63-1) ...
+Setting up libhtml-template-perl (2.97-2) ...
+Setting up libcgi-fast-perl (1:2.17-1) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8) ...
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@ip-172-31-34-154:~$ mysql -u root -p
+Enter password:
+ERROR 1698 (28000): Access denied for user 'root'@'localhost'
+ubuntu@ip-172-31-34-154:~$ mysql -u root -p
+Enter password:
