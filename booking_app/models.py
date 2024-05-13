@@ -92,6 +92,7 @@ class Reservation(models.Model):
         APPROVED = "Approved"
         PENDING = "Pending"
         CANCELED = "Canceled"
+        DONE = "Done"
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     users = models.ForeignKey(User, related_name="reservations",on_delete=models.CASCADE)

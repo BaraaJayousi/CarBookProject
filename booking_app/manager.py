@@ -1,4 +1,5 @@
 from django.db.models import Manager
+from django.db.models import Q
 
 class CarManager(Manager):
   def get_featured_cars(self):
@@ -12,6 +13,16 @@ class CarManager(Manager):
     if car:
       return car
     return False
+  
+  def get_available_cars(self, start_date, end_date, shop_id):
+    # gets all cars without confirmed reservation
+    not_approved_cars = self.filter(reservations__isnull=False, shop__id = shop_id).exclude(reservations__status = "Approved")
+    not_reserved_cars = self.filter(reservations__isnull=True, shop__id=shop_id)
+    # gets cars with reservation outside the required date range
+    available_approved_cars = self.filter(reservations__status="Approved", shop__id = shop_id).filter((Q(reservations__start_date__gt = end_date) & Q(reservations__end_date__gt = start_date)) | (Q(reservations__start_date__lt = end_date) & Q(reservations__end_date__lt = start_date)))
+
+    available_cars = not_approved_cars.union(not_reserved_cars, available_approved_cars)
+    return available_cars
   
 class ReservationManager(Manager):
   def create_reservation(self, car, user, start_date, end_date, shop):
