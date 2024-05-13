@@ -1,6 +1,6 @@
 from django.db import models
 from authentication_app.models import User
-from .manager import CarManager
+from .manager import CarManager, ReservationManager, ShopManager
 
 class Shop(models.Model):
     shop_name = models.CharField(max_length=255)
@@ -10,6 +10,7 @@ class Shop(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    objects = ShopManager()
     def __str__(self):
         return self.shop_name
 
@@ -87,12 +88,21 @@ class Car(models.Model):
 
 
 class Reservation(models.Model):
+    class ReservationStatus(models.TextChoices):
+        APPROVED = "Approved"
+        PENDING = "Pending"
+        CANCELED = "Canceled"
+        DONE = "Done"
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     users = models.ForeignKey(User, related_name="reservations",on_delete=models.CASCADE)
     cars = models.ForeignKey(Car, related_name="reservations",on_delete=models.CASCADE)
+    shop = models.ForeignKey(Shop, related_name="reservations", on_delete=models.CASCADE)
+    status = models.CharField(default=ReservationStatus.PENDING, choices=ReservationStatus, max_length=10)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects= ReservationManager()
 
 
 
