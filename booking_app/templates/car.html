@@ -74,7 +74,7 @@
                   <span class="cat">{{car.car_model.brand}}</span>
                   <p class="price ml-auto">${{car.price}} <span>/day</span></p>
                 </div>
-                <p class="d-flex mb-0 d-block"><a href="{% url 'booking_app:car_book' %}" class="btn btn-primary py-2 mr-1">Book now</a> <a href="{% url 'booking_app:car_details' id=car.id %}" class="btn btn-secondary py-2 ml-1">Details</a></p>
+                <p class="d-flex mb-0 d-block"><a href="{% url 'booking_app:car_book' %}?car_id={{car.id}}&location={{book_details.location}}&start_date={{book_details.start_date}}&end_date={{book_details.end_date}}" class="btn btn-primary py-2 mr-1">Book now</a> <a href="{% url 'booking_app:car_details' id=car.id %}" class="btn btn-secondary py-2 ml-1">Details</a></p>
               </div>
             </div>
           </div>

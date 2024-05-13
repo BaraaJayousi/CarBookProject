@@ -77,29 +77,25 @@
           <div class="col-md-12	featured-top">
             <div class="row no-gutters">
               <div class="col-md-4 d-flex align-items-center">
-                <form action="#" class="request-form ftco-animate bg-primary">
+                <form action="{% url 'booking_app:cars_page' %}" class="request-form ftco-animate bg-primary" method="get">
                   <h2>Make your trip</h2>
                   <div class="form-group">
                     <label for="" class="label">Pick-up location</label>
-                    <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-                  </div>
-                  <div class="form-group">
-                    <label for="" class="label">Drop-off location</label>
-                    <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+                    <select name="location" id="locations" class="form-control">
+                      {% for location in locations %}
+                      <option value="{{location.id}}">{{location}}</option>
+                      {% endfor %}
+                    </select>
                   </div>
                   <div class="d-flex">
                     <div class="form-group mr-2">
                       <label for="" class="label">Pick-up date</label>
-                      <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
+                      <input name="start_date" type="datetime-local" class="form-control" id="book_pick_dat" placeholder="Date" step="1800" required>
                     </div>
                     <div class="form-group ml-2">
                       <label for="" class="label">Drop-off date</label>
-                      <input type="text" class="form-control" id="book_off_date" placeholder="Date">
+                      <input name="end_date" type="date" class="form-control" id="book_off_dat" placeholder="Date" required>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="" class="label">Pick-up time</label>
-                    <input type="text" class="form-control" id="time_pick" placeholder="Time">
                   </div>
                   <div class="form-group">
                     <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
@@ -135,7 +131,7 @@
                       </div>      
                     </div>
                   </div>
-                  <p><a href="{% url 'booking_app:cars_page' %}" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
+                  <p><a href="{% url 'booking_app:cars_page' %}?query=2" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
                 </div>
               </div>
             </div>

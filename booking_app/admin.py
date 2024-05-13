@@ -28,4 +28,4 @@ class CarFeaturesAdmin(admin.ModelAdmin):
 
 @admin.register(Reservation)
 class CarReservationAdmin(admin.ModelAdmin):
-  list_display = ['users', 'cars']
+  list_display = ['users', 'cars','start_date', 'end_date', 'status']
