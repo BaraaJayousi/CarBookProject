@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import View
 from .forms import  RegisterForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 
@@ -24,12 +24,25 @@ class Login(View):
         login(request, user)
         messages.info(request, f"You are now logged in as {user}")
         # Return to homepage
+        return redirect("booking_app:home_page")
       else:
         messages.error(request,"Invalid username or password.")
     else:
       messages.error(request,"Invalid username or password.")
     return redirect("auth_app:login_form")
   
+class Logout(View):
+  def post(self, request):
+    if request.user.is_authenticated:
+      print(request.user)
+      logout(request)
+      messages.info(request, "You have successfully logged out")
+    messages.error(request, "You are not authorized")
+    return redirect("booking_app:home_page")
+  
+  def get(self, request):
+    return redirect("booking_app:home_page")
+
 class Register(View):
   template = 'register.html'
   context = {"RegisterForm": RegisterForm()}

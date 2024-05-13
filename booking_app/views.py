@@ -20,6 +20,7 @@ class CarsPage(View):
   def get(self, request):
     start_date = datetime.fromisoformat(request.GET.get('start_date'))
     end_date = datetime.combine(datetime.fromisoformat(request.GET.get('end_date')),start_date.time())
+    self.context['locations'] = Shop.objects.get_all_shops()
     shop_id =  request.GET.get('location')
     self.context['book_details'] = request.GET
     self.context['cars'] = Car.objects.get_available_cars(start_date, end_date, shop_id) 

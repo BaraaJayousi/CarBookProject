@@ -51,9 +51,6 @@ class Car(models.Model):
     class TransmissionTypes(models.TextChoices):
         AUTOMATIC = "Automatic"
         MANUAL = "Manual"
-    class CarStatus(models.TextChoices):
-        AVAILABLE = "Available"
-        RESERVED = "Reserved"
     class FuelTypes(models.TextChoices):
         ELECTRIC = "Electric"
         GASOLINE = "Gasoline"
@@ -63,7 +60,6 @@ class Car(models.Model):
     car_seats = models.IntegerField(default=5)
     transmission = models.CharField(max_length=10, default=TransmissionTypes.AUTOMATIC, choices=TransmissionTypes)
     milage = models.IntegerField()
-    status = models.CharField(default=CarStatus.AVAILABLE, choices=CarStatus, max_length=10)
     price = models.IntegerField()
     shop = models.ForeignKey(Shop, related_name="cars",on_delete=models.CASCADE)
     fuel = models.CharField(default=FuelTypes.GASOLINE, choices=FuelTypes, max_length=10)
