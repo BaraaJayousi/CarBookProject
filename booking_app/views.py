@@ -12,7 +12,18 @@ class HomePage(View):
     self.context['featured_cars'] = Car.objects.get_featured_cars()
     self.context['locations'] = Shop.objects.get_all_shops()
     return render(request, self.view_template, self.context)
-  
+
+class AboutPage(View):
+  view_template = "about.html"
+  context = {}
+  def get(self, request):
+    return render(request, self.view_template)
+
+class ServicesPage(View):
+  view_template = "services.html"
+  context = {}
+  def get(self, request):
+    return render(request, self.view_template)
 
 class CarsPage(View):
   view_template = "car.html"
