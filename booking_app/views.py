@@ -31,6 +31,7 @@ class CarsPage(View):
   def get(self, request):
     start_date = datetime.fromisoformat(request.GET.get('start_date'))
     end_date = datetime.combine(datetime.fromisoformat(request.GET.get('end_date')),start_date.time())
+    self.context['locations'] = Shop.objects.get_all_shops()
     shop_id =  request.GET.get('location')
     self.context['book_details'] = request.GET
     self.context['cars'] = Car.objects.get_available_cars(start_date, end_date, shop_id) 
@@ -79,3 +80,14 @@ class CarBookPage(View):
     messages.error(request, "You need to be logged in first")
     return redirect(reverse("booking_app:home_page"))
 
+
+class MyBookings(View):
+  view_template = "my-bookings.html"
+  context = {}
+
+  def get(self, request):
+    if request.user.is_authenticated:
+      self.context['bookings'] = Reservation.objects.get_reservations_by_user_id(request.user)
+      return render(request, self.view_template, self.context)
+    messages.error(request, "You need to logged in first")
+    return redirect(reverse("booking_app:home_page"))

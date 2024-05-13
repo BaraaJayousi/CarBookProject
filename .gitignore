@@ -5,6 +5,7 @@
 __pycache__
 db.sqlite3
 media
+*.pem
 
 # Installer logs 
 pip-log.txt 
