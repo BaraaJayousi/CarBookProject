@@ -4,6 +4,7 @@ from django.views.generic import View
 from .models import Car, Shop, Reservation
 from django.contrib import messages
 from datetime import datetime
+from django.db import models
 
 class HomePage(View):
   view_template = "index.html"

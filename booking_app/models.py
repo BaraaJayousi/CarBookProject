@@ -1,7 +1,51 @@
 from django.db import models
 from authentication_app.models import User
-from .manager import CarManager, ReservationManager, ShopManager, UserManager
+from .manager import CarManager, ReservationManager, ShopManager
+from django.db import models
+import bcrypt
 
+class CarValManager(models.Manager):
+    def shop_validator(self,postData):
+        errors={}
+        if len(postData['shop_name'])<2:
+            errors["shop_name"]="first name should be at least 2 characters"
+            return errors
+        if len(postData['city'])<2:
+            errors["city"]="city should be at least 2 characters"
+            return errors
+        if len(postData['address'])<2:
+            errors["address"]="address should be at least 2 characters"
+            return errors
+    def car_validator(self,postData):
+        errors={}
+        if len(postData['car_seats'])<2:
+            errors["car_seats"]="car seats should be at least 2 characters"
+            return errors
+        if len(postData['transmission'])<2:
+            errors["transmission"]="transmission should be at least 2 characters"
+            return errors
+        if len(postData['milage'])<2:
+            errors["milage"]="Password should be at least 2 characters"
+            return errors
+        if len(postData['status'])<2:
+            errors["status"]="Password should be at least 2 characters"
+            return errors
+        if len(postData['price'])<2:
+            errors["price"]="Password should be at least 2 characters"
+            return errors
+        if len(postData['fuel'])<2:
+            errors["fuel"]="Password should be at least 2 characters"
+            return errors
+        if len(postData['model_year'])<4:
+            errors["model_year"]="Password should be at least 4 characters"
+            return errors
+        if len(postData['status'])<2:
+            errors["status"]="Password should be at least 2 characters"
+            return errors
+        if len(postData['status'])<2:
+            errors["status"]="Password should be at least 2 characters"
+            return errors
+         
 class Shop(models.Model):
     shop_name = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
@@ -9,7 +53,7 @@ class Shop(models.Model):
     user = models.ForeignKey(User, related_name="shops",on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    objects= CarValManager()
     objects = ShopManager()
     def __str__(self):
         return self.shop_name
@@ -21,7 +65,6 @@ class ModelYear(models.Model):
 
     def __str__(self):
         return self.year
-
 
 class Brand(models.Model):
     name = models.CharField(max_length=255)
@@ -75,17 +118,9 @@ class Car(models.Model):
     featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
     objects = CarManager()
     def __str__(self):
         return f"{self.car_model} ({self.model_year})"
-
-    # def add_feature_to_car(request,car_feature_id):
-    #     if request.POST['car_id']:
-    #         thisCar_Feature = CarFeature.objects.get(id=car_feature_id)
-    #         thisCar = Car.objects.get(id=request.POST['car_id'])
-    #         thisCar_Feature.cars.add(thisCar)
-
 
 class Reservation(models.Model):
     class ReservationStatus(models.TextChoices):

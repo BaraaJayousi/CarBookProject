@@ -1,28 +1,5 @@
 from django.db.models import Manager
 from django.db.models import Q
-from django.db import models
-import bcrypt
-import re
-class UserManager(models.Manager):
-    def user_validator(self,postData):
-        errors={}
-        EMAIL_REGEX=re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.+_-]+\.[a-zA-Z0-9.+_-]+$')
-        if len(postData['fname'])<2:
-            errors["fname"]="first name should be at least 2 characters"
-            return errors
-        if len(postData['lname'])<2:
-            errors["lname"]="first name should be at least 2 characters"
-            return errors
-        if len(postData['password'])<2:
-            errors["password"]="Password should be at least 8 characters"
-            return errors
-        if not EMAIL_REGEX.match(postData['user_email']):
-            errors['user_email'] = "Invalid email address!"
-            return errors
-        conf_field=postData['password']
-        if not conf_field.match(postData['conf_pw']):
-            errors['conf_pw'] = "password does not matched!"
-            return errors
 
 class CarManager(Manager):
   def get_featured_cars(self):
