@@ -4,6 +4,7 @@ from django.views.generic import View
 from .models import Car, Shop, Reservation
 from django.contrib import messages
 from datetime import datetime
+from .validators import validate_booking_range
 
 class HomePage(View):
   view_template = "index.html"
@@ -31,12 +32,23 @@ class CarsPage(View):
   def get(self, request):
     start_date = datetime.fromisoformat(request.GET.get('start_date'))
     end_date = datetime.combine(datetime.fromisoformat(request.GET.get('end_date')),start_date.time())
-    self.context['locations'] = Shop.objects.get_all_shops()
-    shop_id =  request.GET.get('location')
-    self.context['book_details'] = request.GET
+    valid_date = validate_booking_range(request=request, start_date=start_date, end_date=end_date)
+    if valid_date:
+      self.context['locations'] = Shop.objects.get_all_shops()
+      shop_id =  request.GET.get('location')
+      self.context['book_details'] = request.GET
+      self.context['cars'] = Car.objects.get_available_cars(start_date, end_date, shop_id) 
+      return render(request, self.view_template, self.context)
+    return redirect(reverse("booking_app:home_page"))
+    
+      
+  def post(self, request):
+    start_date = datetime.fromisoformat(request.POST.get('start_date'))
+    end_date = datetime.combine(datetime.fromisoformat(request.POST.get('end_date')),start_date.time())
+    shop_id = request.POST.get('location')
+    self.context['book_details'] = request.POST
     self.context['cars'] = Car.objects.get_available_cars(start_date, end_date, shop_id) 
-    return render(request, self.view_template, self.context)
-  
+    return render(request, "search-results.html", self.context)
 
 class CarDetailsPage(View):
   view_template = "car-single.html"
@@ -44,7 +56,6 @@ class CarDetailsPage(View):
   def get(self, request, id):
     car = Car.objects.get_car_by_id(id)
     if car:
-      print(car)
       self.context['car'] = car
       return render(request, self.view_template, self.context)
     return redirect(reverse("booking_app:cars_page"))
@@ -91,3 +102,11 @@ class MyBookings(View):
       return render(request, self.view_template, self.context)
     messages.error(request, "You need to logged in first")
     return redirect(reverse("booking_app:home_page"))
+  
+  # cancels  a pending reservation
+  def post(self, request):
+    if request.user.is_authenticated:
+      got_canceled = Reservation.objects.cancel_pending_reservations_by_id(reservation_id = request.POST.get('booking_id'), user = request.user)
+      self.context['bookings'] = Reservation.objects.get_reservations_by_user_id(request.user)
+      return render(request, "bookings_table.html", self.context)
+      

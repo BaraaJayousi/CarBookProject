@@ -16,7 +16,8 @@
 
     <section class="pt-4 bg-light">
       <div class="container">
-          <form class="d-flex justify-content-between" action="{% url 'booking_app:cars_page' %}" method="get">
+          <form class="d-flex justify-content-between" id="filter-cars" method="post">
+            {%csrf_token%}
             <div class="d-flex justify-content-between align-items-center">
               <div class="form-group mr-2 mb-4">
                 <label for="" class="label">Choose Location</label>
@@ -42,7 +43,7 @@
 
     <section class="ftco-section bg-light">
       <div class="container">
-        <div class="row">
+        <div class="row" id="search_results">
           {% for car in cars %}
           <div class="col-md-4">
             <div class="car-wrap rounded ftco-animate">

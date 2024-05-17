@@ -58,6 +58,14 @@ class ReservationManager(Manager):
     if reservations:
       return reservations
     return False
+  
+  def cancel_pending_reservations_by_id(self, user, reservation_id):
+    reservation = self.filter(users = user, id= reservation_id).first()
+    if reservation and reservation.status == "Pending":
+      reservation.status = "Canceled"
+      reservation.save()
+      return True
+    return False
 
 
 class ShopManager(Manager):
