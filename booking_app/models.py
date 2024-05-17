@@ -1,6 +1,6 @@
 from django.db import models
 from authentication_app.models import User
-from .manager import CarManager
+from .manager import CarManager, ReservationManager, ShopManager, UserManager
 
 class Shop(models.Model):
     shop_name = models.CharField(max_length=255)
@@ -10,8 +10,9 @@ class Shop(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    objects = ShopManager()
     def __str__(self):
-        return self.shop_name
+        return f"{self.shop_name} - {self.city}"
 
 class ModelYear(models.Model):
     year = models.CharField(max_length=4)
@@ -50,9 +51,6 @@ class Car(models.Model):
     class TransmissionTypes(models.TextChoices):
         AUTOMATIC = "Automatic"
         MANUAL = "Manual"
-    class CarStatus(models.TextChoices):
-        AVAILABLE = "Available"
-        RESERVED = "Reserved"
     class FuelTypes(models.TextChoices):
         ELECTRIC = "Electric"
         GASOLINE = "Gasoline"
@@ -62,7 +60,6 @@ class Car(models.Model):
     car_seats = models.IntegerField(default=5)
     transmission = models.CharField(max_length=10, default=TransmissionTypes.AUTOMATIC, choices=TransmissionTypes)
     milage = models.IntegerField()
-    status = models.CharField(default=CarStatus.AVAILABLE, choices=CarStatus, max_length=10)
     price = models.IntegerField()
     shop = models.ForeignKey(Shop, related_name="cars",on_delete=models.CASCADE)
     fuel = models.CharField(default=FuelTypes.GASOLINE, choices=FuelTypes, max_length=10)
@@ -87,12 +84,21 @@ class Car(models.Model):
 
 
 class Reservation(models.Model):
+    class ReservationStatus(models.TextChoices):
+        APPROVED = "Approved"
+        PENDING = "Pending"
+        CANCELED = "Canceled"
+        DONE = "Done"
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     users = models.ForeignKey(User, related_name="reservations",on_delete=models.CASCADE)
     cars = models.ForeignKey(Car, related_name="reservations",on_delete=models.CASCADE)
+    shop = models.ForeignKey(Shop, related_name="reservations", on_delete=models.CASCADE)
+    status = models.CharField(default=ReservationStatus.PENDING, choices=ReservationStatus, max_length=10)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects= ReservationManager()
 
 
 

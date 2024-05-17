@@ -1,0 +1,40 @@
+{% extends 'main_layout_booking.html' %}
+{% load static%}
+
+{% block content %}
+<section class="ftco-section bg-light">
+  <div class="container">
+    <h3 class="heading mb-4">My Bookings</h3>
+    <div class="row">
+      <table id="bookings_table" class="table">
+        <thead>
+          <tr>
+            <th>Car</th>
+            <th>Pick Up Date</th>
+            <th>Drop Off Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for booking in bookings %}
+          <tr>
+            <td><img src="/media/{{booking.cars.car_image}}" class="img-thumbnail mr-2" style="width: 180px;"/><span>{{booking.cars}}</span></td>
+            <td>{{booking.start_date}}</td>
+            <td>{{booking.end_date}}</td>
+            <td><span class="badge badge-pill badge-info">{{booking.status}}</span></td>
+            {% if booking.status == "Pending" %}
+            <td><form class = "cancel_booking_form">
+              {% csrf_token %}
+              <input type="hidden" name="booking_id" value="{{booking.id}}">
+              <input type="submit" value="Cancel Booking" class="btn btn-danger cancel_booking_submit" >
+            </form></td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}
