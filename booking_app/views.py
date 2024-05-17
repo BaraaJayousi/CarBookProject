@@ -45,10 +45,13 @@ class CarsPage(View):
   def post(self, request):
     start_date = datetime.fromisoformat(request.POST.get('start_date'))
     end_date = datetime.combine(datetime.fromisoformat(request.POST.get('end_date')),start_date.time())
-    shop_id = request.POST.get('location')
-    self.context['book_details'] = request.POST
-    self.context['cars'] = Car.objects.get_available_cars(start_date, end_date, shop_id) 
-    return render(request, "search-results.html", self.context)
+    valid_date = validate_booking_range(request=request, start_date=start_date, end_date=end_date)
+    if valid_date:
+      shop_id = request.POST.get('location')
+      self.context['book_details'] = request.POST
+      self.context['cars'] = Car.objects.get_available_cars(start_date, end_date, shop_id) 
+      return render(request, "search-results.html", self.context)
+    return render(request, 'messages-template.html', self.context)
 
 class CarDetailsPage(View):
   view_template = "car-single.html"
