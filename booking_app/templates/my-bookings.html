@@ -6,7 +6,7 @@
   <div class="container">
     <h3 class="heading mb-4">My Bookings</h3>
     <div class="row">
-      <table class="table">
+      <table id="bookings_table" class="table">
         <thead>
           <tr>
             <th>Car</th>
@@ -23,7 +23,13 @@
             <td>{{booking.start_date}}</td>
             <td>{{booking.end_date}}</td>
             <td><span class="badge badge-pill badge-info">{{booking.status}}</span></td>
-            <td><form action="#" method="post"><input type="submit" value="Cancel Booking" class="btn btn-danger"></form></td>
+            {% if booking.status == "Pending" %}
+            <td><form class = "cancel_booking_form">
+              {% csrf_token %}
+              <input type="hidden" name="booking_id" value="{{booking.id}}">
+              <input type="submit" value="Cancel Booking" class="btn btn-danger cancel_booking_submit" >
+            </form></td>
+            {% endif %}
           </tr>
           {% endfor %}
         </tbody>

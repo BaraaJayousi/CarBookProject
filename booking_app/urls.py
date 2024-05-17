@@ -10,6 +10,7 @@ urlpatterns = [
   path('cars/<int:id>', views.CarDetailsPage.as_view(), name="car_details"),
   path('cars/book', views.CarBookPage.as_view(), name="car_book"),
   path('cars/book-car', views.CarBookPage.as_view(), name="car_book_confirm"),
-  path('cars/my-bookings', views.MyBookings.as_view(), name="my_bookings")
+  path('cars/my-bookings', views.MyBookings.as_view(), name="my_bookings"),
+  path('cars/my-bookings/cancel', views.MyBookings.as_view(), name="cancel_my_booking")
 ]
 
