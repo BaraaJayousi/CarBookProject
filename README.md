@@ -1,6 +1,6 @@
 <h1>CarBook</h1>
 
-Introduction:
+Introduction:-
 
 Welcome to CarBook, the ultimate car rental app. Choose the car you dream of renting in the comfort of your house. Check available cars, and their specification, book in advance and check reviews left by other clients. 
 CarBook makes it easy to find a reliable rental car with a suitable price that suits your budget. The app is going to address these challenges and facilitate user experience for both businesses and users.
