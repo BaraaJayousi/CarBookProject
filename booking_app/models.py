@@ -56,7 +56,7 @@ class Shop(models.Model):
     objects= CarValManager()
     objects = ShopManager()
     def __str__(self):
-        return self.shop_name
+        return f"{self.shop_name} - {self.city}"
 
 class ModelYear(models.Model):
     year = models.CharField(max_length=4)
