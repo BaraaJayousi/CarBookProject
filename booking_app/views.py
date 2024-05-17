@@ -88,10 +88,17 @@ class CarBookPage(View):
   
   def post(self, request):
     if request.user.is_authenticated:
-      booking = Reservation.objects.create_reservation(car=self.context['car'], user= request.user, start_date=self.context['start_date'], end_date=self.context['end_date'], shop=self.context['location'])
-      messages.success(request, "You car is reserved now, wait for confirmation")
-      return redirect(reverse("booking_app:home_page"))
-    messages.error(request, "You need to be logged in first")
+      start_date=self.context['start_date']
+      end_date=self.context['end_date']
+      valid_date = validate_booking_range(request=request, start_date=start_date, end_date=end_date)
+      if valid_date:
+        booking = Reservation.objects.create_reservation(car=self.context['car'], user= request.user, start_date=start_date, end_date=end_date, shop=self.context['location'])
+        messages.success(request, "You car is reserved now, wait for confirmation")
+        return redirect(reverse("booking_app:home_page"))
+      else:
+        messages.error(request, "An error occured during booking confirmation, please try again later")
+    else:
+      messages.error(request, "You need to be logged in first")
     return redirect(reverse("booking_app:home_page"))
 
 
@@ -109,7 +116,7 @@ class MyBookings(View):
         messages.error(request, "You don't have any bookings")
     else:
       messages.error(request, "You need to logged in first")
-      
+
     return redirect(reverse("booking_app:home_page"))
   
   # cancels  a pending reservation
