@@ -101,9 +101,15 @@ class MyBookings(View):
 
   def get(self, request):
     if request.user.is_authenticated:
-      self.context['bookings'] = Reservation.objects.get_reservations_by_user_id(request.user)
-      return render(request, self.view_template, self.context)
-    messages.error(request, "You need to logged in first")
+      user_bookings = Reservation.objects.get_reservations_by_user_id(request.user)
+      if user_bookings:
+        self.context['bookings'] = user_bookings
+        return render(request, self.view_template, self.context)
+      else:
+        messages.error(request, "You don't have any bookings")
+    else:
+      messages.error(request, "You need to logged in first")
+      
     return redirect(reverse("booking_app:home_page"))
   
   # cancels  a pending reservation
